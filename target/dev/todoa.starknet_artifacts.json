@@ -1,0 +1,1 @@
+{"version":1,"contracts":[{"id":"6geubb4e0uuuc","package_name":"todoa","contract_name":"Todo","module_path":"todoa::todo::Todo","artifacts":{"sierra":"todoa_Todo.contract_class.json","casm":null}}]}
