@@ -45,27 +45,28 @@ pub mod Todo {
         // create todo
         fn create_todo(ref self: ContractState, title: felt252, description: felt252) -> bool {
 
-            let id = self.todo_count.read();
-            let current_to_id = id + 1;
+            let  id = self.todo_count.read() + 1;
 
-            let new_todo = Todos { id: current_to_id, title: title, description: description, is_done: false };
+            let mut new_todo = Todos { id: id, title: title, description: description, is_done: false };
 
             self.todos.write(id, new_todo);
 
-            self.todo_count.write(current_to_id);
+            self.todo_count.write(id);
 
             true
         }
 
         fn update_todo_title(ref self: ContractState, title: felt252,id: u8) -> bool {
             let mut todo = self.todos.read(id);
-             todo.description = title;            
+            todo.title = title;            
+            self.todos.write(id, todo);
             true
         }
 
         fn update_todo_description(ref self: ContractState, description: felt252,id: u8) -> bool {
             let mut todo = self.todos.read(id);
-             todo.description = description;            
+             todo.description = description;   
+             self.todos.write(id, todo);         
             true
         }
 
